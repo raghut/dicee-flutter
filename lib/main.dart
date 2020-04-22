@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,33 +11,54 @@ void main() {
           title: Text('Dicee'),
           backgroundColor: Colors.red,
         ),
-        body: DicePage(),
+        body: _DicePage(),
       ),
     ),
   );
 }
 
-class DicePage extends StatelessWidget {
+class _DicePage extends StatefulWidget {
+  @override
+  __DicePageState createState() => __DicePageState();
+}
+
+class __DicePageState extends State<_DicePage> {
+  var leftDiceNo = 1;
+  var rightDiceNo = 5;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Row(
-
         children: <Widget>[
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Image.asset('images/dice1.png'),
+            child: FlatButton(
+              onPressed: () {
+                print('Dice1 pressed');
+                setState(() => rollTheDices());
+              },
+              child: Image.asset('images/dice$leftDiceNo.png'),
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Image.asset('images/dice1.png'),
+            child: FlatButton(
+              onPressed: () {
+                print('Dice1 pressed');
+                setState(() => rollTheDices());
+              },
+              child: Image.asset('images/dice$rightDiceNo.png'),
             ),
           )
         ],
       ),
     );
+  }
+
+  void rollTheDices() {
+    leftDiceNo = Random().nextInt(6) + 1;
+    rightDiceNo = Random().nextInt(6) + 1;
+
+    print('Dice1 pressed $leftDiceNo');
+    print('Dice2 pressed $rightDiceNo');
   }
 }
